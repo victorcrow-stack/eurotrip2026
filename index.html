@@ -116,6 +116,8 @@ body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;-webkit-fon
 /* BACK BTN */
 .back{display:inline-flex;align-items:center;gap:6px;margin:20px 0 0;padding:8px 16px;background:#fff;border:1px solid #EDE9E3;border-radius:10px;cursor:pointer;font-family:inherit;font-size:12px;color:#1B3A5C;font-weight:500;transition:.2s}
 .back:hover{background:#EBF5FB}
+.map-btn{display:block;width:100%;margin-bottom:18px;padding:12px 18px;background:linear-gradient(135deg,#1a73e8,#4285f4);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:.2s;box-shadow:0 2px 8px rgba(26,115,232,.25)}
+.map-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,115,232,.35)}
 
 /* FOOTER */
 .footer{text-align:center;padding:32px 16px;font-size:11px;color:#bbb;border-top:1px solid #EDE9E3;margin-top:40px}
@@ -128,6 +130,22 @@ body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;-webkit-fon
 <script>
 const ICONS={bcn:"🏖️",roma:"🏛️",firenze:"🎨",paris:"🗼",madrid:"☀️",bruselas:"🍫",brujas:"🏰",gante:"⚔️"};
 const COLORS={bcn:"#E74C3C",roma:"#C0392B",firenze:"#C4622D",paris:"#2E86C1",madrid:"#E67E22",bruselas:"#2471A3",brujas:"#8B6555",gante:"#1E8449"};
+const ROUTES={
+"bcn_0":"https://www.google.com/maps/dir/Sagrada+Familia+Barcelona/Playa+Barceloneta+Barcelona/Port+Olimpic+Barcelona/@41.389,2.187,14z/data=!4m2!4m1!3e2",
+"bcn_1":"https://www.google.com/maps/dir/Sagrada+Familia+Barcelona/Casa+Mila+La+Pedrera+Barcelona/Casa+Batllo+Barcelona/La+Rambla+Barcelona/Mercat+de+la+Boqueria+Barcelona/Catedral+de+Barcelona/Arc+de+Triomf+Barcelona/@41.387,2.17,14z/data=!4m2!4m1!3e2",
+"roma_0":"https://www.google.com/maps/dir/Colosseum+Rome/Arch+of+Constantine+Rome/Roman+Forum+Rome/Palatine+Hill+Rome/Circus+Maximus+Rome/Bocca+della+Verita+Rome/Trastevere+Rome/Colosseum+Rome/@41.893,12.488,14z/data=!4m2!4m1!3e2",
+"roma_1":"https://www.google.com/maps/dir/Trevi+Fountain+Rome/Spanish+Steps+Rome/Pantheon+Rome/Piazza+Navona+Rome/Castel+Sant+Angelo+Rome/St+Peters+Basilica+Vatican/Piazza+del+Popolo+Rome/Terrazza+del+Pincio+Rome/@41.902,12.477,14z/data=!4m2!4m1!3e2",
+"firenze_0":"https://www.google.com/maps/dir/Piazza+Santissima+Annunziata+Florence/Piazza+della+Signoria+Florence/Uffizi+Gallery+Florence/Ponte+Vecchio+Florence/Palazzo+Pitti+Florence/Piazza+Santo+Spirito+Florence/Basilica+Santa+Croce+Florence/@43.77,11.255,14z/data=!4m2!4m1!3e2",
+"firenze_1":"https://www.google.com/maps/dir/Piazzale+Michelangelo+Florence/San+Miniato+al+Monte+Florence/Florence+Cathedral/Piazza+della+Repubblica+Florence/Mercato+Centrale+Florence/Basilica+San+Lorenzo+Florence/Santa+Maria+Novella+Florence/@43.77,11.255,14z/data=!4m2!4m1!3e2",
+"paris_1":"https://www.google.com/maps/dir/Trocadero+Paris/Eiffel+Tower+Paris/Arc+de+Triomphe+Paris/Grand+Palais+Paris/Pont+Alexandre+III+Paris/Les+Invalides+Paris/Place+de+la+Concorde+Paris/Louvre+Museum+Paris/Palais+Royal+Paris/Opera+Garnier+Paris/@48.862,2.335,13z/data=!4m2!4m1!3e2",
+"paris_2":"https://www.google.com/maps/dir/Le+Mur+des+Je+Taime+Paris/Sacre+Coeur+Paris/Place+du+Tertre+Paris/La+Maison+Rose+Montmartre+Paris/Moulin+de+la+Galette+Paris/Cafe+des+Deux+Moulins+Paris/Moulin+Rouge+Paris/@48.886,2.34,15z/data=!4m2!4m1!3e2",
+"madrid_0":"https://www.google.com/maps/dir/Parque+del+Retiro+Madrid/Palacio+de+Cristal+Retiro+Madrid/Puerta+de+Alcala+Madrid/Plaza+de+Cibeles+Madrid/@40.42,-3.688,15z/data=!4m2!4m1!3e2",
+"madrid_1":"https://www.google.com/maps/dir/Estacion+Atocha+Madrid/Museo+del+Prado+Madrid/Puerta+del+Sol+Madrid/Plaza+Mayor+Madrid/Mercado+San+Miguel+Madrid/Catedral+Almudena+Madrid/Palacio+Real+Madrid/Templo+de+Debod+Madrid/Gran+Via+Madrid/@40.418,-3.707,14z/data=!4m2!4m1!3e2",
+"madrid_2":"https://www.google.com/maps/dir/Lavapies+Madrid/Chueca+Madrid/Malasana+Madrid/Circulo+de+Bellas+Artes+Madrid/Plaza+de+Colon+Madrid/Santiago+Bernabeu+Stadium+Madrid/@40.425,-3.7,14z/data=!4m2!4m1!3e2",
+"bruselas_1":"https://www.google.com/maps/dir/Grand+Place+Brussels/Manneken+Pis+Brussels/Galeries+Royales+Saint+Hubert+Brussels/Cathedral+St+Michael+Brussels/Mont+des+Arts+Brussels/Grand+Sablon+Brussels/Palais+de+Justice+Brussels/Delirium+Cafe+Brussels/Parc+du+Cinquantenaire+Brussels/@50.845,4.355,14z/data=!4m2!4m1!3e2",
+"brujas_0":"https://www.google.com/maps/dir/Markt+Bruges/Belfort+Bruges/Burg+Bruges/Rozenhoedkaai+Bruges/Church+of+Our+Lady+Bruges/Bonifacius+Bridge+Bruges/Begijnhof+Bruges/Minnewater+Bruges/De+Halve+Maan+Brewery+Bruges/@51.208,3.225,15z/data=!4m2!4m1!3e2",
+"gante_0":"https://www.google.com/maps/dir/St+Michaels+Bridge+Ghent/Graslei+Ghent/St+Nicholas+Church+Ghent/St+Bavos+Cathedral+Ghent/Gravensteen+Castle+Ghent/Patershol+Ghent/@51.054,3.72,15z/data=!4m2!4m1!3e2"
+};
 const C=[
 {id:"home"},
 {id:"bcn",flag:"🇪🇸",name:"Barcelona",dates:"27–29 Jun",accom:"Airbnb zona Sagrada Família · 5 min caminando",
@@ -459,6 +477,7 @@ ${C.slice(1).map((x,i)=>`<button class="nb${cur===i+1?' active':''}" onclick="go
 <div class="ch"><div class="ch-icon">${ic}</div><div><div class="ch-name">${c.flag} ${c.name}</div><div class="ch-info">${c.dates} · ${c.accom||''}</div></div></div>
 <div class="dt">${c.days.map((dd,i)=>`<button class="dtb${i===cday?' active':''}" onclick="go(${cur},${i})">${dd.date.split('·')[0]}<br><span style="font-size:9px;opacity:.6">${dd.title.substring(0,22)}</span></button>`).join('')}</div>
 <div class="dh"><div class="dh-title">${d.title}</div><div class="dh-sub">${d.date}</div></div>
+${(()=>{const rk=c.id+'_'+cday;return ROUTES[rk]?'<a class="map-btn" href="'+ROUTES[rk]+'" target="_blank" rel="noopener">🗺️ Abrir ruta del día en Google Maps</a>':'';})()}
 <div class="tl">`;
 d.stops.forEach((s,si)=>{
 const[time,type,icon,name,dur,desc,wf,food]=s;
