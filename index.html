@@ -32,7 +32,7 @@ body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;-webkit-fon
 .cc{background:#fff;border-radius:16px;padding:20px 16px;cursor:pointer;transition:all .25s;border:1px solid #EDE9E3;text-align:center;position:relative;overflow:hidden}
 .cc:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
 .cc-img{font-size:42px;margin-bottom:8px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}
-.cc-flag{position:absolute;top:10px;right:10px;font-size:18px}
+.cc-flag{position:absolute;top:10px;right:10px;font-size:10px;background:#F0EDE8;padding:3px 8px;border-radius:12px;color:#777;font-weight:500}
 .cc-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#1B3A5C;margin-bottom:2px}
 .cc-dates{font-size:11px;color:#888;margin-bottom:6px}
 .cc-tag{font-size:10px;background:#EBF5FB;color:#2E86C1;padding:3px 10px;border-radius:20px;display:inline-block;font-weight:500}
@@ -126,7 +126,7 @@ body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;-webkit-fon
 <body>
 <div id="app"></div>
 <script>
-const ICONS={bcn:"🏖️",roma:"🏛️",firenze:"🌺",paris:"🗼",madrid:"☀️",bruselas:"🍫",brujas:"🏰",gante:"⚔️"};
+const ICONS={bcn:"🏖️",roma:"🏛️",firenze:"🎨",paris:"🗼",madrid:"☀️",bruselas:"🍫",brujas:"🏰",gante:"⚔️"};
 const COLORS={bcn:"#E74C3C",roma:"#C0392B",firenze:"#C4622D",paris:"#2E86C1",madrid:"#E67E22",bruselas:"#2471A3",brujas:"#8B6555",gante:"#1E8449"};
 const C=[
 {id:"home"},
@@ -488,11 +488,15 @@ const tips=[
 ["📱","<b>Documentos:</b> Pasaportes, boarding passes offline, seguro de viaje"],
 ["💳","<b>Dinero:</b> Tarjeta sin comisión. Algo de efectivo para sitios cash-only"],
 ["🔌","<b>Enchufes:</b> Tipo C/F europeo. Igual en España, Italia, Francia y Bélgica"],
-["👕","<b>Ropa:</b> Hombros y rodillas cubiertos para iglesias (Italia y Vaticano)"],
+["👕","<b>Ropa:</b> Cómoda y fresca, es verano europeo (+30°C). Shorts, camisetas, sandalias para descanso"],
 ["🍽️","<b>Comidas:</b> ~10-12€/persona. Menús del día y mercados son la clave"],
 ["🧳","<b>Maleta de mano:</b> Máximo 40 x 30 x 20 cm para que quepa bajo el asiento (Ryanair/Vueling)"],
 ["⏰","<b>Madrugar:</b> Es clave para lograr conocer todos los puntos del día sin afán"],
-["🚿","<b>Mañanas:</b> Levantarse temprano para lograr bañarnos todos a tiempo y salir sin contratiempos"]
+["🚿","<b>Mañanas:</b> Levantarse temprano para lograr bañarnos todos a tiempo y salir sin contratiempos"],
+["🧺","<b>Lavandería:</b> El 05 de julio será día de descanso en Madrid, para ir a lavandería y secado de ropa"],
+["🛒","<b>Mercado:</b> El 05 de julio de descanso en Madrid, se hará mercado en Mercadona para desayunos y cenas"],
+["🗣️","<b>Idioma:</b> Saludos básicos — Italiano: Buongiorno (buenos días), Buonasera (buenas noches), Grazie (gracias), Per favore (por favor) · Francés: Bonjour (buenos días), Bonsoir (buenas noches), Merci (gracias), S'il vous plaît (por favor), Au revoir (adiós)"],
+["😊","<b>Actitud:</b> Disfrutar las caminatas, el sol, todos felices — ¡es nuestro viaje soñado!"]
 ];
 let h=`<div class="hero">
 <div class="hero-badge">✈️ Aventura Familiar · Europa 2026</div>
@@ -511,7 +515,7 @@ let h=`<div class="hero">
 <div class="city-grid">
 ${C.slice(1).map((c,i)=>{const ic=ICONS[c.id]||'🌍';const co=COLORS[c.id]||'#2E86C1';const ms=c.days.reduce((a,d)=>a+(d.must?d.must.length:0),0);
 return`<div class="cc" onclick="go(${i+1})">
-<div class="cc-flag">${c.flag}</div>
+<div class="cc-flag" style="background:${({bcn:'#FDECEA',roma:'#FDECEA',firenze:'#FDECEA',paris:'#EBF5FB',madrid:'#FEF9E7',bruselas:'#EAFAF1',brujas:'#EAFAF1',gante:'#EAFAF1'})[c.id]||'#F0EDE8'};color:${({bcn:'#C0392B',roma:'#C0392B',firenze:'#C4622D',paris:'#2E86C1',madrid:'#E67E22',bruselas:'#1E8449',brujas:'#1E8449',gante:'#1E8449'})[c.id]||'#777'}">${({bcn:'España',roma:'Italia',firenze:'Italia',paris:'Francia',madrid:'España',bruselas:'Bélgica',brujas:'Bélgica',gante:'Bélgica'})[c.id]||''}</div>
 <div class="cc-img">${ic}</div>
 <div class="cc-name">${c.name}</div>
 <div class="cc-dates">${c.dates}</div>
